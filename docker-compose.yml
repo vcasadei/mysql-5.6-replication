@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  primary:
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    container_name: primary
+    build: './primary'
+    ports:
+      - "3306:3306"
+
+  secondary:
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    container_name: secondary
+    build: './secondary'
+    ports:
+      - "3307:3306"
+    depends_on:
+      - primary
